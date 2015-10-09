@@ -1,0 +1,24 @@
+Course/Project:  COMP32211-SOC
+Date:            29/09/15 15:03
+
+
+Lecture One
+
+
+Deliverables:
+
+  - read the first phase from the manual
+
+Definitions:
+
+ASIC:-
+  Application specific integrated chip
+
+
+Information:
+
+  - card number:- number on the card = 5
+
+  - algorythm:-  Edge detection
+
+  - screen res 640x480

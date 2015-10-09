@@ -1,0 +1,13 @@
+Course/Project:  COMP32211-SOC
+Date:            06/10/15 15:05
+
+
+Simulation Stages:-
+  Different types of simulation require different simulators
+  going down the list more detailed models / simulations are required
+  - Functional
+  - Timing
+  - Electrical
+  - Pysical
+
+More verilog stimulus examples and techniques

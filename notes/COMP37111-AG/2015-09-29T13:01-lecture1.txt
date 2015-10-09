@@ -1,0 +1,20 @@
+Course/Project:  COMP37111-AG
+Date:            29/09/15 13:01
+
+
+first lecture
+
+
+modeling, rendering applications
+real-time rendering
+
+Well 'ard!
+blackboard
+
+Parts:
+  - procedural modeling
+  - modeling acquisition
+  - Global illumination model
+  - real time renderinig
+
+Lab deadline 5pm Friday 11 Dec

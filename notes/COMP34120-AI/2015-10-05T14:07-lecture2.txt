@@ -1,0 +1,24 @@
+Course/Project:  COMP34120-AI
+Date:            05/10/15 14:07
+
+
+writing game move trees
+payoff (P1PAYOFF,P2PAYOFF)
+  eg. (1,-1) p1 wins p2 looses
+  1 :- WIN
+  0 :- DRAW
+  -1:- LOSS
+
+
+imperfect information
+  you might not be able to see all the data that another player holds
+  poker (hidden cards)
+
+zero-sum
+  each leaf in the game tree has a zero sum of payoffs i.e. (1,-1)
+
+perfect information
+  each player knows where he is in the game tree
+
+game of chance
+  has "nature" or "chance" player

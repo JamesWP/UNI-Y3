@@ -1,0 +1,16 @@
+Course/Project:  COMP34120-AI
+Date:            29/09/15 11:28
+
+Lecture #1
+
+discussed what it was to mean game
+
+Definition:
+  
+  Game:-
+  where an agent (player's) moves affect the value of moves other 
+  (non-controlled) agents
+
+  Agent:-
+  A player of such a game
+

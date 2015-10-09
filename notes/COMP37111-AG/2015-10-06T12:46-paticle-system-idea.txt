@@ -1,0 +1,12 @@
+Course/Project:  COMP37111-AG
+Date:            06/10/15 12:46
+
+Particle system idea
+  Particle Explosion Effect
+    Explosion Flash
+    Explostion physics particles
+    Explostion gass physics
+    Explosion sprites
+    Explosion fireball
+  Link: http://www.gamedev.net/page/resources/_/creative/visual-arts/make-a-particle-explosion-effect-r2701
+

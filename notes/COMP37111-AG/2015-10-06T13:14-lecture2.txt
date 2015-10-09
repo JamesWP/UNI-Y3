@@ -1,0 +1,23 @@
+Course/Project:  COMP37111-AG
+Date:            06/10/15 13:14
+
+Efficency
+Position calculation at time t given the starting parameters
+Particles
+  Points
+  Objects
+  Blurs
+  Lines between old position
+
+Fractals
+  Devide / Replace old structure with multiple copies of structure
+
+Grammar defined particle paths
+  VERY COOL!
+    F:- forwrd
+    L:- turn left
+    R:- turn right
+    [:- push location (save location onto stack)
+    ]:- pop location (restor location from stack)
+
+

@@ -1,0 +1,36 @@
+Course/Project:  COMP36111-AL
+Date:            01/10/15 13:25
+
+              (^.^)
+              .| |.
+   _______    _____
+  / ......\  /  __ \  
+  | |        | (.) |
+  | |  ----  |  |\  \
+  | |___| |  |  | |  |
+  \______/   |__| |__|
+
+Graph definition: (for this course):
+  -  a pairing of nodes(V) and edges(E)
+  -  no self loops
+  -  no multiple edges
+  -  no directions on edges
+
+Directed Graph definition:
+  -  each edge is a link from a to b : (a,b) <- E
+
+Degree of a vertex v definition:
+  -  the number of outgoing edges from v
+
+Connected (for undirected graph):
+  -  every node can reach any other node in the graph
+
+Connected (for directed graph):
+  -  the underlying non directed graph is Connected
+
+Stongly Connected (for directed graph):
+  -  each node in the graph can reach every other node
+
+Reachable:
+  -  there is a path you can follow, such that you can get from a to b
+
