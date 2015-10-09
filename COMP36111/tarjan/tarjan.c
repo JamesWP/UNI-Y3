@@ -7,3 +7,144 @@
 //
 
 #include "tarjan.h"
+
+/**
+ * UNDEFINED_NODE_INDEX special not visited flag against a node
+ */
+const int UNDEFINED_NODE_INDEX= -1;
+
+/**
+ * STACK_ON speciallag against a node
+ */
+const int STACK_ON = 1;
+
+/**
+ * STACK_OFF speciallag against a node
+ */
+const int STACK_OFF = 0;
+
+
+void
+parse_inputs(Graph* g)
+{
+  /*char c;
+  while((c=getchar())!=EOF){
+
+  }*/
+  init_graph(g, 6);
+  /*
+              S   D
+     1        1 | 2 3
+    / .       2 | 3
+   .   .      3 | 1 4
+   2 -.3      4 | 5
+       |      5 | 6
+       .      6 | 4
+       4
+      / .
+     .   \
+    5 -. 6
+   */
+
+  // node 1
+  g->nodes[0].out_links = (node_index*) malloc(sizeof(node_index)*2);
+  g->nodes[0].out_links[0] = 2;
+  g->nodes[0].out_links[1] = 3;
+  g->nodes[0].number_of_out_links = 2;
+
+  // node 2
+  g->nodes[1].out_links = (node_index*) malloc(sizeof(node_index)*1);
+  g->nodes[1].out_links[0] = 3;
+  g->nodes[1].number_of_out_links = 1;
+
+  // node 3
+  g->nodes[2].out_links = (node_index*) malloc(sizeof(node_index)*2);
+  g->nodes[2].out_links[0] = 1;
+  g->nodes[2].out_links[1] = 4;
+  g->nodes[2].number_of_out_links = 2;
+
+  // node 4
+  g->nodes[3].out_links = (node_index*) malloc(sizeof(node_index)*1);
+  g->nodes[3].out_links[0] = 5;
+  g->nodes[3].number_of_out_links = 1;
+
+  // node 5
+  g->nodes[4].out_links = (node_index*) malloc(sizeof(node_index)*1);
+  g->nodes[4].out_links[0] = 6;
+  g->nodes[4].number_of_out_links = 1;
+
+  // node 6
+  g->nodes[5].out_links = (node_index*) malloc(sizeof(node_index)*1);
+  g->nodes[5].out_links[0] = 4;
+  g->nodes[5].number_of_out_links = 1;
+}
+
+void
+calculate_strongly_connected_components(Graph* g)
+{
+  Tarjan context;
+  context.lowlink = (node_int_map) malloc(sizeof(int) * g->number_of_nodes);
+  context.index = (node_int_map) malloc(sizeof(int) * g->number_of_nodes);
+  context.stack = (node_int_map) malloc(sizeof(int) * g->number_of_nodes);
+  context.onStack = (node_int_map) malloc(sizeof(int) * g->number_of_nodes);
+  context.stackPointer = 0;
+
+  for(int i = 0;i<g->number_of_nodes;i++){
+    context.index[i] = UNDEFINED_NODE_INDEX;
+    context.onStack[i] = STACK_OFF;
+  }
+
+  context.dfsnumber = 0;
+
+  for(int i = 0;i<g->number_of_nodes;i++){
+    if(context.index[i] == UNDEFINED_NODE_INDEX)
+      strong_connect(g, i, &context);
+  }
+
+  free(context.lowlink);
+  free(context.index);
+  free(context.stack);
+  free(context.onStack);
+}
+
+void
+strong_connect(Graph* g, node_index v, Tarjan* context)
+{
+  context->index[v] = context->dfsnumber;
+  context->lowlink[v] = context->dfsnumber;
+  context->dfsnumber++;
+
+  context->stack[context->stackPointer++] = v;
+  context->onStack[v] = STACK_ON;
+
+  // for each out edge w (edge from v to w)
+  for(int i = 0;i<g->nodes[v].number_of_out_links;i++){
+    node_index w = g->nodes[v].out_links[i];
+    if(context->index[w]==UNDEFINED_NODE_INDEX){
+      strong_connect(g, w, context);
+      context->lowlink[v] = MIN(context->lowlink[v],context->lowlink[w]);
+    }else if(context->onStack[w]==STACK_ON){
+      context->lowlink[v] = MIN(context->lowlink[v],context->index[w]);
+    }
+  }
+  /*
+   if (v.lowlink = v.index) then
+     start a new strongly connected component
+     repeat
+       w := S.pop()
+       w.onStack := false
+       add w to current strongly connected component
+     until (w = v)
+     output the current strongly connected component
+   end if
+   */
+
+}
+
+
+void
+output_strongly_connected_components(Graph* g)
+{
+  printf("Output:\n");
+}
+

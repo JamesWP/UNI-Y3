@@ -7,3 +7,21 @@
 //
 
 #include "graph.h"
+
+void
+init_graph(Graph* g, int number_of_nodes)
+{
+  g->nodes = (Node*) malloc(sizeof(Node) * number_of_nodes);
+  if(g->nodes==NULL){
+    exit(1);
+  }
+  g->number_of_nodes = number_of_nodes;
+}
+
+void
+free_graph(Graph* g)
+{
+  free(g->nodes);
+}
+
+
