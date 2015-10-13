@@ -1,0 +1,8 @@
+Course/Project:  COMP34120-AI
+Date:            12/10/15 14:05
+
+
+discussed two player games 
+nash equalibrium for two option two player games
+
+prisoner's dilema

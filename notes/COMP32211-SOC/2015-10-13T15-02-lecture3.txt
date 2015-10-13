@@ -1,0 +1,13 @@
+Course/Project:  COMP32211-SOC
+Date:            13/10/15 15:02
+
+discussed testing 
+
+V diagram of testing and verification
+
+high level idea has requirements tested by acceptance from consumer
+
+then these are broken down into more granular parts 
+  System design -> Integration test
+
+

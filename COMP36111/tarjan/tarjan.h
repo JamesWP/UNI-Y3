@@ -30,15 +30,15 @@ void parse_inputs(Graph* g);
  *  calculates the strongly connected components of the graph pointed to by g
  *  @returns noting
  */
-void calculate_strongly_connected_components(Graph* g);
+node_index** calculate_strongly_connected_components(Graph* g);
 
 /**
  * output_strongly_connected_components
  *
- *  outputs to stdout the strongly connected components in the graph g
+ *  outputs to stdout the strongly connected components
  *  @returns nothing
  */
-void output_strongly_connected_components(Graph* g);
+void output_strongly_connected_components(Graph* g, node_index** components);
 
 typedef int* node_int_map;
 
@@ -57,6 +57,13 @@ struct tarjan_struct
 
   // map of node_index to ON/OFF
   node_int_map onStack;
+
+  // list of connected components
+  node_index** connectedComponents;
+  
+  // index of next connected component
+  int connectedComponentsIndex;
+
 
   int dfsnumber;
 };
