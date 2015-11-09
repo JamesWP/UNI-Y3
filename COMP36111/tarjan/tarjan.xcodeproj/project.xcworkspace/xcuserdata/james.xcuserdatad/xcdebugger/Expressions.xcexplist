@@ -3,6 +3,37 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "read_all_input:readgraph.c">
+         <PersistentStrings>
+            <PersistentString
+               value = "tokens[4]">
+            </PersistentString>
+            <PersistentString
+               value = "tokens[2]">
+            </PersistentString>
+            <PersistentString
+               value = "tokens[3]">
+            </PersistentString>
+            <PersistentString
+               value = "tokens[1]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "from_tokens:readgraph.c">
+         <PersistentStrings>
+            <PersistentString
+               value = "g-&gt;nodes[2]">
+            </PersistentString>
+            <PersistentString
+               value = "g-&gt;nodes[i].number_of_out_links">
+            </PersistentString>
+            <PersistentString
+               value = "g-&gt;nodes[i]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "strong_connect:tarjan.c">
          <PersistentStrings>
             <PersistentString

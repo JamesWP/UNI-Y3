@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "graph.h"
+#include "readgraph.h"
 
 /**************   MACROS   ***********/
 #define MIN(a,b) (a<b?(a):(b))
@@ -40,8 +41,12 @@ node_index** calculate_strongly_connected_components(Graph* g);
  */
 void output_strongly_connected_components(Graph* g, node_index** components);
 
+// a map from integers to nodes and vice versa
 typedef int* node_int_map;
 
+/**
+ * a struct to store the current state of the algorythm
+ */
 struct tarjan_struct
 {
   // map of node_index to lowlink number
@@ -64,13 +69,19 @@ struct tarjan_struct
   // index of next connected component
   int connectedComponentsIndex;
 
-
+  // the next current dfs number
   int dfsnumber;
 };
 typedef struct tarjan_struct Tarjan;
 
 /**
- *
+ * once a root of a connected component has been discovered, this can then
+ * retreive the connected component from the stack
+ */
+void retreive_connected_component(Graph* g, node_index v, Tarjan* context);
+
+/**
+ * the tarjan algorythm
  */
 void strong_connect(Graph* g, node_index v, Tarjan* context);
 

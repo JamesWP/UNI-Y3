@@ -23,60 +23,21 @@ const int STACK_ON = 1;
  */
 const int STACK_OFF = 0;
 
+#define STDIN
 
 void
 parse_inputs(Graph* g)
 {
-  /*char c;
-  while((c=getchar())!=EOF){
-
-  }*/
-  init_graph(g, 6);
-  /*
-              S   D
-     0        0 | 1 2
-    / .       1 | 2
-   .   .      2 | 0 3
-   1 -.2      3 | 4
-       |      4 | 5
-       .      5 | 3
-       3
-      / .
-     .   \
-    4 -. 5
-   */
-
-  // node 0
-  g->nodes[0].out_links = (node_index*) malloc(sizeof(node_index)*2);
-  g->nodes[0].out_links[0] = 1;
-  g->nodes[0].out_links[1] = 2;
-  g->nodes[0].number_of_out_links = 2;
-
-  // node 1
-  g->nodes[1].out_links = (node_index*) malloc(sizeof(node_index)*1);
-  g->nodes[1].out_links[0] = 2;
-  g->nodes[1].number_of_out_links = 1;
-
-  // node 2
-  g->nodes[2].out_links = (node_index*) malloc(sizeof(node_index)*2);
-  g->nodes[2].out_links[0] = 0;
-  g->nodes[2].out_links[1] = 3;
-  g->nodes[2].number_of_out_links = 2;
-
-  // node 3
-  g->nodes[3].out_links = (node_index*) malloc(sizeof(node_index)*1);
-  g->nodes[3].out_links[0] = 4;
-  g->nodes[3].number_of_out_links = 1;
-
-  // node 4
-  g->nodes[4].out_links = (node_index*) malloc(sizeof(node_index)*1);
-  g->nodes[4].out_links[0] = 5;
-  g->nodes[4].number_of_out_links = 1;
-
-  // node 5
-  g->nodes[5].out_links = (node_index*) malloc(sizeof(node_index)*1);
-  g->nodes[5].out_links[0] = 3;
-  g->nodes[5].number_of_out_links = 1;
+#ifdef STDIN
+  FILE* file = stdin;
+#else
+  FILE* file = fopen("testinput.txt","r");
+#endif
+  Input_token* tokens = read_all_input(file);
+  from_tokens(g,tokens);
+  if(file!=stdin) fclose(file);
+  printf("Input:\n");
+  print_graph(g);
 }
 
 node_index**
@@ -114,43 +75,64 @@ calculate_strongly_connected_components(Graph* g)
   return context.connectedComponents;
 }
 
+// Shorthand definitions for common algo functions
+
+// get vertex's index
+#define I(v) (context->index[v])
+// get low link
+#define LL(v) (context->lowlink[v])
+// the curent depth first number
+#define DFS (context->dfsnumber)
+// push vertex into stack
+#define PUSH(v) ({context->stack[context->stackPointer++] = v; context->onStack[v] = STACK_ON;})
+// pops a vertex off the stack into w
+#define POP(w) ({w = context->stack[--context->stackPointer];context->onStack[w] = STACK_OFF;})
+// is vertex on stack
+#define ONSTACK(w) (context->onStack[w]==STACK_ON)
+// get the i'th outlink of vertex v
+#define OUTLINK(v,i) (g->nodes[v].out_links[i])
+// the number of outlinks of v
+#define OUTLINKS(v) (g->nodes[v].number_of_out_links)
+// if the node has an assigned dfs number
+#define HASDFS(w) (context->index[w]==UNDEFINED_NODE_INDEX)
+
+
+void
+retreive_connected_component(Graph* g, node_index v, Tarjan* context){
+  node_index* connectedComponent = (node_index*) malloc(sizeof(node_index)* g->number_of_nodes);
+  for(int i = 0; i < g->number_of_nodes; i++) connectedComponent[i] = UNDEFINED_NODE_INDEX;
+  int connectedComponentIndex = 0;
+  node_index w;
+  do{
+    POP(w);
+    connectedComponent[connectedComponentIndex++] = w;
+  }while(w!=v);
+
+  context->connectedComponents[context->connectedComponentsIndex++]
+    = connectedComponent;
+}
+
 void
 strong_connect(Graph* g, node_index v, Tarjan* context)
 {
-  context->index[v] = context->dfsnumber;
-  context->lowlink[v] = context->dfsnumber;
-  context->dfsnumber++;
+  I(v) = DFS;
+  LL(v)= DFS;
+  DFS++;
 
-  // push
-  context->stack[context->stackPointer++] = v;
-  context->onStack[v] = STACK_ON;
+  PUSH(v);
 
   // for each out edge w (edge from v to w)
-  for(int i = 0;i<g->nodes[v].number_of_out_links;i++){
-    node_index w = g->nodes[v].out_links[i];
-    if(context->index[w]==UNDEFINED_NODE_INDEX){
+  for(int i = 0;i<OUTLINKS(v);i++){
+    node_index w = OUTLINK(v, i);
+    if(HASDFS(w)){
       strong_connect(g, w, context);
-      context->lowlink[v] = MIN(context->lowlink[v],context->lowlink[w]);
-    }else if(context->onStack[w]==STACK_ON){
-      context->lowlink[v] = MIN(context->lowlink[v],context->index[w]);
+      LL(v) = MIN(LL(v),LL(w));
+    }else if(ONSTACK(w)){
+      LL(v) = MIN(LL(v),I(w));
     }
   }
-  if(context->lowlink[v] == context->index[v]){
-    node_index* connectedComponent = (node_index*) malloc(sizeof(node_index)* g->number_of_nodes);
-    for(int i = 0; i < g->number_of_nodes; i++) connectedComponent[i] = UNDEFINED_NODE_INDEX;
-    int connectedComponentIndex = 0;
-    node_index w;
-    do{
-      // pop
-      w = context->stack[--context->stackPointer];
-      context->onStack[w] = STACK_OFF;
 
-      connectedComponent[connectedComponentIndex++] = w;
-    }while(w!=v);
-
-    context->connectedComponents[context->connectedComponentsIndex++]
-      = connectedComponent;
-  }
+  if(LL(v) == I(v)) retreive_connected_component(g, v, context);
 }
 
 void

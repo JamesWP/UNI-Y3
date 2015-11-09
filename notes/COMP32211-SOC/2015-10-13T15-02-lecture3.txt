@@ -11,3 +11,18 @@ then these are broken down into more granular parts
   System design -> Integration test
 
 
+
+Tests:
+
+  simple, do outputs toggle etc...
+  do lines do as required, not undefined etc...
+  data in - out
+
+  test random input
+  test edge cases, testing all possibilities for data is infeasable
+
+  test state machine, test each state, and probabaly all transitions in
+  the system, from what state to what other state and what the trigger for the
+  change was
+
+  Test your tests!!!

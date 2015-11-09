@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A131D521BCEFFF0002BE86A /* readgraph.c in Sources */ = {isa = PBXBuildFile; fileRef = 1A131D501BCEFFF0002BE86A /* readgraph.c */; settings = {ASSET_TAGS = (); }; };
+		1A131D541BCF172F002BE86A /* testinput.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1A131D531BCF04B2002BE86A /* testinput.txt */; };
 		1A3787BC1BC7032F00AA0DE5 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 1A3787BB1BC7032F00AA0DE5 /* main.c */; settings = {ASSET_TAGS = (); }; };
 		1A3787BF1BC7297800AA0DE5 /* tarjan.c in Sources */ = {isa = PBXBuildFile; fileRef = 1A3787BD1BC7297800AA0DE5 /* tarjan.c */; settings = {ASSET_TAGS = (); }; };
 		1A3787C21BC72C4E00AA0DE5 /* graph.c in Sources */ = {isa = PBXBuildFile; fileRef = 1A3787C01BC72C4E00AA0DE5 /* graph.c */; settings = {ASSET_TAGS = (); }; };
@@ -15,16 +17,20 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		1A3787AF1BC702AC00AA0DE5 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
 			files = (
+				1A131D541BCF172F002BE86A /* testinput.txt in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1A131D501BCEFFF0002BE86A /* readgraph.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = readgraph.c; sourceTree = "<group>"; };
+		1A131D511BCEFFF0002BE86A /* readgraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = readgraph.h; sourceTree = "<group>"; };
+		1A131D531BCF04B2002BE86A /* testinput.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testinput.txt; sourceTree = "<group>"; };
 		1A3787B11BC702AC00AA0DE5 /* tarjan */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tarjan; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A3787BB1BC7032F00AA0DE5 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		1A3787BD1BC7297800AA0DE5 /* tarjan.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tarjan.c; sourceTree = "<group>"; };
@@ -47,6 +53,9 @@
 		1A3787A81BC702AC00AA0DE5 = {
 			isa = PBXGroup;
 			children = (
+				1A131D531BCF04B2002BE86A /* testinput.txt */,
+				1A131D501BCEFFF0002BE86A /* readgraph.c */,
+				1A131D511BCEFFF0002BE86A /* readgraph.h */,
 				1A3787C01BC72C4E00AA0DE5 /* graph.c */,
 				1A3787C11BC72C4E00AA0DE5 /* graph.h */,
 				1A3787BD1BC7297800AA0DE5 /* tarjan.c */,
@@ -122,6 +131,7 @@
 			files = (
 				1A3787C21BC72C4E00AA0DE5 /* graph.c in Sources */,
 				1A3787BC1BC7032F00AA0DE5 /* main.c in Sources */,
+				1A131D521BCEFFF0002BE86A /* readgraph.c in Sources */,
 				1A3787BF1BC7297800AA0DE5 /* tarjan.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
