@@ -40,6 +40,8 @@ int main(int argc, char const** argv)
   int64_t time = clock.getElapsedTime().asMicroseconds();
   FPS fpsCounter;
 
+  window.setVerticalSyncEnabled(true);
+
   // Start the game loop
   while (window.isOpen())
   {

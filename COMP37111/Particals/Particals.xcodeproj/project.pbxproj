@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A18821A1BF0E3DB008CB4DE /* EngineConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A1882181BF0E3DB008CB4DE /* EngineConfig.cpp */; };
 		1A32F9581BDF978F00D941AD /* Simulated.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A32F9561BDF978F00D941AD /* Simulated.cpp */; };
 		1A35FE641BD5A0AF00B9FF72 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A35FE631BD5A0AF00B9FF72 /* main.cpp */; };
 		1A35FE701BD5A21000B9FF72 /* sansation.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1A35FE681BD5A0AF00B9FF72 /* sansation.ttf */; };
@@ -29,6 +30,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1A1882181BF0E3DB008CB4DE /* EngineConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EngineConfig.cpp; sourceTree = "<group>"; };
+		1A1882191BF0E3DB008CB4DE /* EngineConfig.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EngineConfig.hpp; sourceTree = "<group>"; };
 		1A32F9561BDF978F00D941AD /* Simulated.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Simulated.cpp; sourceTree = "<group>"; };
 		1A32F9571BDF978F00D941AD /* Simulated.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Simulated.hpp; sourceTree = "<group>"; };
 		1A35FE601BD5A0AE00B9FF72 /* Particals */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Particals; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +82,8 @@
 				1A32F9561BDF978F00D941AD /* Simulated.cpp */,
 				1A32F9571BDF978F00D941AD /* Simulated.hpp */,
 				1A53A3701BE27E3300046E21 /* FPS.h */,
+				1A1882181BF0E3DB008CB4DE /* EngineConfig.cpp */,
+				1A1882191BF0E3DB008CB4DE /* EngineConfig.hpp */,
 			);
 			path = Particals;
 			sourceTree = "<group>";
@@ -149,6 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A35FE641BD5A0AF00B9FF72 /* main.cpp in Sources */,
+				1A18821A1BF0E3DB008CB4DE /* EngineConfig.cpp in Sources */,
 				1A35FE731BD5A5B900B9FF72 /* Engine.cpp in Sources */,
 				1A32F9581BDF978F00D941AD /* Simulated.cpp in Sources */,
 			);

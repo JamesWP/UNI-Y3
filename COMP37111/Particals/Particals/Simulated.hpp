@@ -13,6 +13,7 @@
 #include <SFML/Graphics.hpp>
 #include "Consts.h"
 #include "Engine.hpp"
+#include "EngineConfig.hpp"
 
 class Engine;
 
@@ -24,7 +25,9 @@ public:
 };
 
 class SimplePoint: public Simulated {
-  sf::Vertex position;
+  sf::VertexArray positions;
+  float width=EngineConfig::getPointWidth();
+  float height=EngineConfig::getPointHeight();
   sf::Vector2f velocity;
   sf::Vector2f acceleration;
 public:
@@ -32,8 +35,8 @@ public:
            sf::Vector2f velocity, sf::Vector2f acceleration);
   void update(int64_t micros);
   void draw(sf::RenderWindow *window);
-  bool del() { return position.position.x > WIDTH
-    || position.position.y > HEIGHT || position.position.x < 0 || position.position.y < 0; }
+  bool del() { return positions[0].position.x > WIDTH
+    || positions[0].position.y > HEIGHT || positions[0].position.x < 0 || positions[0].position.y < 0; }
 };
 
 class Particle: public SimplePoint {
