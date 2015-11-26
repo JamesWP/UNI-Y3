@@ -21,8 +21,11 @@
 #include "Engine.hpp"
 #include "FPS.h"
 
+EngineConfig conf;
+
 int main(int argc, char const** argv)
 {
+
   // Create the main window
   sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML window");
 
@@ -67,7 +70,7 @@ int main(int argc, char const** argv)
 
       // Space pressed: next mode
       if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
-        EngineConfig::nextState();
+        conf.nextState();
       }
     }
 
@@ -84,7 +87,7 @@ int main(int argc, char const** argv)
     fpsCounter.update();
 
     text.setString(std::to_string(fpsCounter.getFPS()*100000000000+ e.objCount()));
-    stateMsg.setString(EngineConfig::getStateMsg());
+    stateMsg.setString(conf.getStateMsg());
 
     // Draw the string
     window.draw(text);

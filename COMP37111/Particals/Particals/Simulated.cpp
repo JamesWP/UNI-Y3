@@ -24,7 +24,8 @@ Simulated::del(){ return false; }
 
 
 SimplePoint::SimplePoint(sf::Vector2f initialPosition,
-                         sf::Vector2f velocity, sf::Vector2f acceleration){
+                         sf::Vector2f velocity, sf::Vector2f acceleration, Engine *host){
+  hostEngine = host;
   positions = sf::VertexArray(sf::Quads, 4);
   SimplePoint::positions[0].position = initialPosition;
   SimplePoint::positions[1].position = sf::Vector2f(initialPosition.x + width,initialPosition.y);
@@ -45,6 +46,12 @@ void
 SimplePoint::update(int64_t micros){
   Simulated::update(micros);
 
+  if(conf.inState(EngineState::GRAVITY_CHANGE)){
+    sf::Vector2i mPos = hostEngine->getMousePosition();
+    const sf::Vector2f unit = sf::Vector2f(0.0000000001,0.0000000001);
+    acceleration = sf::Vector2f(unit.x*(mPos.x - (WIDTH/2)),unit.y*(mPos.y-(HEIGHT/2)));
+  }
+
   velocity.x += acceleration.x * micros;
   velocity.y += acceleration.y * micros;
 
@@ -64,8 +71,8 @@ SimplePoint::draw(sf::RenderWindow *window){
 }
 
 Particle::Particle(sf::Vector2f initialPosition,
-                   sf::Vector2f velocity, sf::Vector2f acceleration)
-:SimplePoint(initialPosition,velocity,acceleration){
+                   sf::Vector2f velocity, sf::Vector2f acceleration, Engine *host)
+:SimplePoint(initialPosition,velocity,acceleration,host){
   age = 0;
   lifetime = 3000000;
 }
@@ -100,11 +107,11 @@ sf::Vector2f newVelocity(const sf::Vector2f direction){
 }
 
 Particle*
-newRandParticle(const sf::Vector2f position){
-  return new Particle(
+newRandParticle(const sf::Vector2f position,Engine *host){
+    return new Particle(
                       newPosition(position),
                       newVelocity(sf::Vector2f(0.0006,-0.00060)),
-                      sf::Vector2f(0,0.000000002));
+                      sf::Vector2f(0,0.000000002),host);
 }
 
 Emmitter::Emmitter(sf::Vector2f position, Engine *host){
@@ -117,14 +124,14 @@ Emmitter::Emmitter(sf::Vector2f position, Engine *host){
 void
 Emmitter::update(int64_t micros){
   time+=micros;
-  if(EngineConfig::inState(EngineState::MOVE_EMMITTER)){
+  if(conf.inState(EngineState::MOVE_EMMITTER)){
     position.position.x = hostEngine->getMousePosition().x;
     position.position.y = hostEngine->getMousePosition().y;
   }
   if(time>nextSpawn){
     nextSpawn = time + 1; //+ (rand()/10000000);
     for(int i=0;i<1000;i++)
-     hostEngine->addNewParticle(newRandParticle(position.position));
+     hostEngine->addNewParticle(newRandParticle(position.position,hostEngine));
   }
 }
 

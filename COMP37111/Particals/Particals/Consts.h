@@ -12,4 +12,8 @@
 #define WIDTH 800
 #define HEIGHT 600
 
+#include "EngineConfig.hpp"
+
+extern EngineConfig conf;
+
 #endif /* Consts_h */

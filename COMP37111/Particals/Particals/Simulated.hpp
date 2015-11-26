@@ -26,13 +26,14 @@ public:
 
 class SimplePoint: public Simulated {
   sf::VertexArray positions;
-  float width=EngineConfig::getPointWidth();
-  float height=EngineConfig::getPointHeight();
+  float width= conf.getPointWidth();
+  float height= conf.getPointHeight();
   sf::Vector2f velocity;
   sf::Vector2f acceleration;
+  Engine *hostEngine;
 public:
   SimplePoint(sf::Vector2f initialPosition,
-           sf::Vector2f velocity, sf::Vector2f acceleration);
+           sf::Vector2f velocity, sf::Vector2f acceleration, Engine *host);
   void update(int64_t micros);
   void draw(sf::RenderWindow *window);
   bool del() { return positions[0].position.x > WIDTH
@@ -44,16 +45,16 @@ class Particle: public SimplePoint {
   double lifetime;
 public:
   Particle(sf::Vector2f initialPosition,
-                   sf::Vector2f velocity, sf::Vector2f acceleration);
+                   sf::Vector2f velocity, sf::Vector2f acceleration,Engine *host);
   void update(int64_t micros);
   bool del();
 };
 
 class Emmitter: public Simulated {
   sf::Vertex position;
-  Engine *hostEngine;
   int64_t time;
   int64_t nextSpawn;
+  Engine *hostEngine;
 public:
   Emmitter(sf::Vector2f initialPosition, Engine *host);
   void update(int64_t micros);

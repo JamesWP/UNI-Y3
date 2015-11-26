@@ -26,7 +26,7 @@ public:
   void update(int64_t micros);
   void draw(sf::RenderWindow *window);
   float getFPS(const sf::Time& time);
-  int objCount(){ return objects.size(); }
+  int objCount(){ return (int) objects.size(); }
   void addNewParticle(Simulated *s){ objects.push_back(s); }
   void setMousePosition(int x, int y){ mousePosition.x = x; mousePosition.y = y; }
   sf::Vector2i getMousePosition() const {return mousePosition;}
