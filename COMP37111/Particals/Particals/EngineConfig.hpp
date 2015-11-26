@@ -12,20 +12,21 @@
 #include <stdio.h>
 #include <string>
 #include <SFML/Graphics.hpp>
-#include "Consts.h"
 
 typedef enum State{
-  MOVE_EMMITTER, GRAVITY_CHANGE
+  MOVE_EMMITTER, GRAVITY_CHANGE, COLOR_CHANGE
 } EngineState;
 
 std::string getStateString(EngineState s);
 EngineState getNextState(EngineState s);
+sf::Color getColorFromTime(long time, int intensity);
 
 class EngineConfig {
 private:
   float width = 4.0;
   float height = 4.0;
-  sf::Vector2i mPos = sf::Vector2i(0,HEIGHT/2 + 100);
+  sf::Clock *clock;
+  sf::Vector2i mPos = sf::Vector2i(0,0);
   EngineState engineState = MOVE_EMMITTER;
 public:
   float getPointWidth(){ return width;}
@@ -35,11 +36,18 @@ public:
   void setPointWidth(float newWidth){ width = newWidth;}
   void setPointHeight(float newHeight){ height = newHeight;}
   void setMousePosition(const sf::Vector2i newMPos){ mPos = newMPos;}
+  void setClock(sf::Clock *newClock){clock = newClock;}
 
   EngineState getCurentState(){return engineState;}
   bool inState(EngineState s){return s==engineState;}
   void nextState(){engineState = getNextState(engineState);}
   std::string getStateMsg(){return getStateString(engineState);}
+
+  const sf::Color getColor(){
+    int shift = mPos.x/30;
+    int intensity = mPos.y/3;
+    return getColorFromTime(clock->getElapsedTime().asMicroseconds()>>shift,intensity);
+  }
 };
 
 #endif /* EngineConfig_hp */

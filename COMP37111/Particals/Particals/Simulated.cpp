@@ -37,7 +37,8 @@ Simulated::acceleration(const sf::Vector2f pos){
 
 
 SimplePoint::SimplePoint(sf::Vector2f initialPosition,
-                         sf::Vector2f velocity){
+                         sf::Vector2f velocity,
+                         const sf::Color col){
   positions = sf::VertexArray(sf::Quads, 4);
   SimplePoint::positions[0].position = initialPosition;
   SimplePoint::positions[1].position = sf::Vector2f(initialPosition.x + width,initialPosition.y);
@@ -45,10 +46,10 @@ SimplePoint::SimplePoint(sf::Vector2f initialPosition,
   SimplePoint::positions[3].position = sf::Vector2f(initialPosition.x,
                                                     initialPosition.y + height);
 
-  SimplePoint::positions[0].color = sf::Color::White;
-  SimplePoint::positions[1].color = sf::Color::White;
-  SimplePoint::positions[2].color = sf::Color::White;
-  SimplePoint::positions[3].color = sf::Color::White;
+  SimplePoint::positions[0].color = col;
+  SimplePoint::positions[1].color = col;
+  SimplePoint::positions[2].color = col;
+  SimplePoint::positions[3].color = col;
 
   SimplePoint::velocity = velocity;
 }
@@ -78,8 +79,9 @@ SimplePoint::draw(sf::RenderWindow *window){
 }
 
 Particle::Particle(sf::Vector2f initialPosition,
-                   sf::Vector2f velocity)
-:SimplePoint(initialPosition,velocity){
+                   sf::Vector2f velocity,
+                   const sf::Color col)
+:SimplePoint(initialPosition,velocity,col){
   age = 0;
   lifetime = 3000000;
 }
@@ -113,11 +115,20 @@ sf::Vector2f newVelocity(const sf::Vector2f direction){
                       direction.y + fRand(-0.0002, 0.0002));
 }
 
+const sf::Color newColor(){
+  if(conf.inState(EngineState::COLOR_CHANGE)){
+    return conf.getColor();
+  }else{
+    return sf::Color::White;
+  }
+}
+
 Particle*
 newRandParticle(const sf::Vector2f position){
     return new Particle(
-                      newPosition(position),
-                      newVelocity(sf::Vector2f(0,0)));
+                        newPosition(position),
+                        newVelocity(sf::Vector2f(0,0)),
+                        newColor());
 }
 
 Emmitter::Emmitter(sf::Vector2f position, Engine *host){

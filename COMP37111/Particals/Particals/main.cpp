@@ -42,6 +42,7 @@ int main(int argc, char const** argv)
 
   Engine e;
   sf::Clock clock;
+  conf.setClock(&clock);
   int64_t time = clock.getElapsedTime().asMicroseconds();
   FPS fpsCounter;
 
