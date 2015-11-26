@@ -10,15 +10,31 @@
 #define EngineConfig_hpp
 
 #include <stdio.h>
+#include <string>
 
-namespace EngineConfig {
-  static float width = 4.0;
-  static float height = 4.0;
-  static float getPointWidth(){ return width;}
-  static float getPointHeight(){ return height;}
+typedef enum State{
+  MOVE_EMMITTER, GRAVITY_CHANGE
+} EngineState;
 
-  static void setPointWidth(float newWidth){ width = newWidth;}
-  static void setPointHeight(float newHeight){ height = newHeight;}
-}
+std::string getStateString(EngineState s);
+EngineState getNextState(EngineState s);
+
+class EngineConfig {
+private:
+  float width = 4.0;
+  float height = 4.0;
+  EngineState engineState = MOVE_EMMITTER;
+public:
+  float getPointWidth(){ return width;}
+  float getPointHeight(){ return height;}
+
+  void setPointWidth(float newWidth){ width = newWidth;}
+  void setPointHeight(float newHeight){ height = newHeight;}
+
+  EngineState getCurentState(){return engineState;}
+  bool inState(EngineState s){return s==engineState;}
+  void nextState(){engineState = getNextState(engineState);}
+  std::string getStateMsg(){return getStateString(engineState);}
+};
 
 #endif /* EngineConfig_hp */

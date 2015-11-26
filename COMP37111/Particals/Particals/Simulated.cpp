@@ -117,11 +117,13 @@ Emmitter::Emmitter(sf::Vector2f position, Engine *host){
 void
 Emmitter::update(int64_t micros){
   time+=micros;
-  position.position.x = hostEngine->getMousePosition().x;
-  position.position.y = hostEngine->getMousePosition().y;
+  if(EngineConfig::inState(EngineState::MOVE_EMMITTER)){
+    position.position.x = hostEngine->getMousePosition().x;
+    position.position.y = hostEngine->getMousePosition().y;
+  }
   if(time>nextSpawn){
     nextSpawn = time + 1; //+ (rand()/10000000);
-    for(int i=0;i<200;i++)
+    for(int i=0;i<1000;i++)
      hostEngine->addNewParticle(newRandParticle(position.position));
   }
 }

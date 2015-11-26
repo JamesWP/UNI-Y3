@@ -32,6 +32,8 @@ int main(int argc, char const** argv)
     return EXIT_FAILURE;
   }
   sf::Text text("Hello SFML", font, 50);
+  sf::Text stateMsg("Hello SFML", font, 50);
+  stateMsg.move(sf::Vector2f(0,40));
   text.setColor(sf::Color::White);
 
 
@@ -62,6 +64,11 @@ int main(int argc, char const** argv)
       if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
         window.close();
       }
+
+      // Space pressed: next mode
+      if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
+        EngineConfig::nextState();
+      }
     }
 
     // Clear screen
@@ -76,10 +83,12 @@ int main(int argc, char const** argv)
 
     fpsCounter.update();
 
-    text.setString(std::to_string(fpsCounter.getFPS()*1000000 + e.objCount()));
+    text.setString(std::to_string(fpsCounter.getFPS()*100000000000+ e.objCount()));
+    stateMsg.setString(EngineConfig::getStateMsg());
 
     // Draw the string
     window.draw(text);
+    window.draw(stateMsg);
 
     // Update the window
     window.display();
