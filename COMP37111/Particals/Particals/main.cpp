@@ -55,7 +55,7 @@ int main(int argc, char const** argv)
     while (window.pollEvent(event))
     {
       if (event.type == sf::Event::MouseMoved) {
-        e.setMousePosition(event.mouseMove.x,event.mouseMove.y);
+        conf.setMousePosition(sf::Vector2i(event.mouseMove.x,event.mouseMove.y));
       }
 
       // Close window: exit

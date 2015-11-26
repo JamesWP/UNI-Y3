@@ -22,10 +22,22 @@ Simulated::draw(sf::RenderWindow *window){
 bool
 Simulated::del(){ return false; }
 
+const sf::Vector2f
+Simulated::acceleration(const sf::Vector2f pos){
+  const sf::Vector2f unit = sf::Vector2f(0.00000000001,0.00000000001);
+  sf::Vector2i mPos;
+  if(conf.inState(EngineState::GRAVITY_CHANGE)){
+      mPos = conf.getMousePosition();
+  }else{
+    mPos = sf::Vector2i(WIDTH/2,HEIGHT/2 + 100);
+  }
+
+  return sf::Vector2f(unit.x*(mPos.x - (WIDTH/2)),unit.y*(mPos.y-(HEIGHT/2)));
+}
+
 
 SimplePoint::SimplePoint(sf::Vector2f initialPosition,
-                         sf::Vector2f velocity, sf::Vector2f acceleration, Engine *host){
-  hostEngine = host;
+                         sf::Vector2f velocity){
   positions = sf::VertexArray(sf::Quads, 4);
   SimplePoint::positions[0].position = initialPosition;
   SimplePoint::positions[1].position = sf::Vector2f(initialPosition.x + width,initialPosition.y);
@@ -39,19 +51,13 @@ SimplePoint::SimplePoint(sf::Vector2f initialPosition,
   SimplePoint::positions[3].color = sf::Color::White;
 
   SimplePoint::velocity = velocity;
-  SimplePoint::acceleration = acceleration;
 }
 
 void
 SimplePoint::update(int64_t micros){
   Simulated::update(micros);
 
-  if(conf.inState(EngineState::GRAVITY_CHANGE)){
-    sf::Vector2i mPos = hostEngine->getMousePosition();
-    const sf::Vector2f unit = sf::Vector2f(0.0000000001,0.0000000001);
-    acceleration = sf::Vector2f(unit.x*(mPos.x - (WIDTH/2)),unit.y*(mPos.y-(HEIGHT/2)));
-  }
-
+  const sf::Vector2f acceleration = SimplePoint::acceleration(positions[0].position);
   velocity.x += acceleration.x * micros;
   velocity.y += acceleration.y * micros;
 
@@ -67,12 +73,13 @@ SimplePoint::update(int64_t micros){
 void
 SimplePoint::draw(sf::RenderWindow *window){
   //Simulated::draw(window);
-  window->draw(&positions[0], 4, sf::Quads);
+  //window->draw(&positions[0], 4, sf::Quads);
+  window->draw(&positions[0], 1, sf::Points);
 }
 
 Particle::Particle(sf::Vector2f initialPosition,
-                   sf::Vector2f velocity, sf::Vector2f acceleration, Engine *host)
-:SimplePoint(initialPosition,velocity,acceleration,host){
+                   sf::Vector2f velocity)
+:SimplePoint(initialPosition,velocity){
   age = 0;
   lifetime = 3000000;
 }
@@ -107,11 +114,10 @@ sf::Vector2f newVelocity(const sf::Vector2f direction){
 }
 
 Particle*
-newRandParticle(const sf::Vector2f position,Engine *host){
+newRandParticle(const sf::Vector2f position){
     return new Particle(
                       newPosition(position),
-                      newVelocity(sf::Vector2f(0.0006,-0.00060)),
-                      sf::Vector2f(0,0.000000002),host);
+                      newVelocity(sf::Vector2f(0,0)));
 }
 
 Emmitter::Emmitter(sf::Vector2f position, Engine *host){
@@ -125,13 +131,13 @@ void
 Emmitter::update(int64_t micros){
   time+=micros;
   if(conf.inState(EngineState::MOVE_EMMITTER)){
-    position.position.x = hostEngine->getMousePosition().x;
-    position.position.y = hostEngine->getMousePosition().y;
+    position.position.x = conf.getMousePosition().x;
+    position.position.y = conf.getMousePosition().y;
   }
   if(time>nextSpawn){
     nextSpawn = time + 1; //+ (rand()/10000000);
     for(int i=0;i<1000;i++)
-     hostEngine->addNewParticle(newRandParticle(position.position,hostEngine));
+     hostEngine->addNewParticle(newRandParticle(position.position));
   }
 }
 

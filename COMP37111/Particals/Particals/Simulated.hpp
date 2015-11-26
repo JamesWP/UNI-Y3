@@ -22,6 +22,7 @@ public:
   virtual void update(int64_t micros);
   virtual void draw(sf::RenderWindow *window);
   virtual bool del();
+  const sf::Vector2f acceleration(const sf::Vector2f pos);
 };
 
 class SimplePoint: public Simulated {
@@ -29,11 +30,9 @@ class SimplePoint: public Simulated {
   float width= conf.getPointWidth();
   float height= conf.getPointHeight();
   sf::Vector2f velocity;
-  sf::Vector2f acceleration;
-  Engine *hostEngine;
 public:
   SimplePoint(sf::Vector2f initialPosition,
-           sf::Vector2f velocity, sf::Vector2f acceleration, Engine *host);
+           sf::Vector2f velocity);
   void update(int64_t micros);
   void draw(sf::RenderWindow *window);
   bool del() { return positions[0].position.x > WIDTH
@@ -45,7 +44,7 @@ class Particle: public SimplePoint {
   double lifetime;
 public:
   Particle(sf::Vector2f initialPosition,
-                   sf::Vector2f velocity, sf::Vector2f acceleration,Engine *host);
+                   sf::Vector2f velocity);
   void update(int64_t micros);
   bool del();
 };
