@@ -1,0 +1,56 @@
+Course/Project:  COMP36111-AL
+Date:            12/11/15 13:06
+
+
+coursework
+
+bipartite graph G=(V,W,E) V=left nodes, W=right nodes, E=edges
+ a matching is a subset of the edges
+
+Edges go (w,v) where w (= W and v (= V
+if perfect if there is a matching where every node has a pair in the other set
+
+naive solution: try all combinations
+
+Flow network.
+
+  no self links
+  back-loop {u,v},{v,u} (= E
+
+
+  V,E,s,t,c
+
+  - V are vertextes
+  - E are the directed edges
+  - s is a vertex in V with only out links
+  - t is a vertex in V with only in links
+  - c is a capacity function
+    c | e -> cap where e (= E and cap is the capacity for that link
+
+  A flow is a function that will return a non negative real number
+    this represents the flow along the edge
+
+  Rules
+  - for all v in V where v!=s or t the sum in and out are balanced
+    net flow is 0 for all other nodes
+  - for all edges the flow along it is not greater than the limit
+
+            SUPER FAST LECTURE!!!
+
+  Maximal flow calculation
+    1_ construct auxilary directed graph
+      - add links opposing flow
+      UNION
+      - add links where there are spare capacity
+    2_ pick any path from the source to the target
+      - on this path any edge either can have more flow or less flow
+    3_ increase allong spare cap edge, decrease allong opposite flow
+
+    new flow is constructed
+
+BTW....
+OH LOL this actually solves the marige problem 
+
+
+
+

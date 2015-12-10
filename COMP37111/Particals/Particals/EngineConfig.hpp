@@ -14,19 +14,23 @@
 #include <SFML/Graphics.hpp>
 
 typedef enum State{
-  MOVE_EMMITTER, GRAVITY_CHANGE, COLOR_CHANGE
+  FIRST, MOVE_EMMITTER, GRAVITY_CHANGE, COLOR_CHANGE, RENDER_CHANGE, SPECIAL, LAST
 } EngineState;
 
 std::string getStateString(EngineState s);
+std::string getStateDescription(EngineState s);
 EngineState getNextState(EngineState s);
+EngineState getPrevState(EngineState s);
 sf::Color getColorFromTime(long time, int intensity);
 
 class EngineConfig {
 private:
   float width = 4.0;
   float height = 4.0;
+  bool ep = false; // enter pressed
+  bool bs = false; // backspace
   sf::Clock *clock;
-  sf::Vector2i mPos = sf::Vector2i(0,0);
+  sf::Vector2i mPos = sf::Vector2i(400,300);
   EngineState engineState = MOVE_EMMITTER;
 public:
   float getPointWidth(){ return width;}
@@ -41,7 +45,16 @@ public:
   EngineState getCurentState(){return engineState;}
   bool inState(EngineState s){return s==engineState;}
   void nextState(){engineState = getNextState(engineState);}
+  void prevState(){engineState = getPrevState(engineState);}
   std::string getStateMsg(){return getStateString(engineState);}
+  std::string getStateDesc(){return getStateDescription(engineState);}
+
+  bool readEnter(){if(ep){ep = false; return true;} return false;}
+  void enterPressed(){ep = true;}
+
+
+  bool readBackspace(){if(bs){bs = false; return true;} return false;}
+  void backspacePressed(){bs = true;}
 
   const sf::Color getColor(){
     int shift = mPos.x/30;

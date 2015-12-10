@@ -1,0 +1,19 @@
+Course/Project:  COMP37111-AG
+Date:            20/10/15 13:04
+
+
+last lecture was podcast
+
+making meshes from points
+automagicaly
+
+delauny algorythm 
+  creates delauny trianges from delauny edges
+
+
+after mesh has been created:
+
+simplification:
+ quadratic method
+
+take average of two vertexes and remesh the outside triangles

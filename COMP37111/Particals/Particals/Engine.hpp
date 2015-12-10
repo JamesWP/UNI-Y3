@@ -14,19 +14,23 @@
 #include "Consts.h"
 #include "Simulated.hpp"
 
-class Simulated;
+class Particle;
+class Emmitter;
 
 class Engine{
 
 private:
-  std::vector<Simulated*> objects;
+  std::vector<Emmitter> emmitters;
+  std::vector<Particle> particles;
 public:
   Engine();
   void update(int64_t micros);
   void draw(sf::RenderWindow *window);
   float getFPS(const sf::Time& time);
-  int objCount(){ return (int) objects.size(); }
-  void addNewParticle(Simulated *s){ objects.push_back(s); }
+  int objCount(){ return (int) particles.size(); }
+  int emmCount(){ return (int) emmitters.size(); }
+  void addNewParticle(const Emmitter&);
+  void addNewParticle(const Particle&);
 };
 
 #endif /* Engine_hpp */

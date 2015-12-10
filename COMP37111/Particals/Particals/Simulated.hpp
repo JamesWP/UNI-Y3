@@ -14,19 +14,22 @@
 #include "Consts.h"
 #include "Engine.hpp"
 #include "EngineConfig.hpp"
+#include "MathUtil.hpp"
 
 class Engine;
 
 class Simulated {
 public:
-  virtual void update(int64_t micros);
-  virtual void draw(sf::RenderWindow *window);
-  virtual bool del();
+  virtual void update(int64_t micros) =0;
+  virtual void draw(sf::RenderWindow *window) =0;
+  virtual bool del() = 0;
   const sf::Vector2f acceleration(const sf::Vector2f pos);
+  virtual ~Simulated(){}
 };
 
 class SimplePoint: public Simulated {
   sf::VertexArray positions;
+  sf::VertexArray lastPositions;
   float width= conf.getPointWidth();
   float height= conf.getPointHeight();
   sf::Vector2f velocity;
@@ -58,6 +61,8 @@ class Emmitter: public Simulated {
 public:
   Emmitter(sf::Vector2f initialPosition, Engine *host);
   void update(int64_t micros);
+  void draw(sf::RenderWindow *window){}
+  bool del() {return false;}
 };
 
 #endif /* Simulated_hpp */

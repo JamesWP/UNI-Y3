@@ -1,0 +1,16 @@
+Course/Project:  COMP32211-SOC
+Date:            20/10/15 15:05
+
+implementation of algos
+  simplification
+  lots of ways of doing things
+  limitations of hardware can affect algorythm design
+ 
+  pipeline the lojic
+    increased throughtput
+    increased latency
+
+  latching problems should set goal to only save on clock edge
+  don't  latch on posedge (anything else)
+
+  

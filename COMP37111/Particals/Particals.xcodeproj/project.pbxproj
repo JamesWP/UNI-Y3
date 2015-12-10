@@ -13,6 +13,8 @@
 		1A35FE701BD5A21000B9FF72 /* sansation.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1A35FE681BD5A0AF00B9FF72 /* sansation.ttf */; };
 		1A35FE731BD5A5B900B9FF72 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A35FE711BD5A5B900B9FF72 /* Engine.cpp */; };
 		1A53A3721BE286A900046E21 /* ufonts.com_courier-new.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1A53A3711BE2866400046E21 /* ufonts.com_courier-new.ttf */; };
+		1A7564C61C111F8C009C4A86 /* MathUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A7564C41C111F8C009C4A86 /* MathUtil.cpp */; };
+		1A7564C91C1124F4009C4A86 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A7564C71C1124F4009C4A86 /* Timer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,6 +44,10 @@
 		1A35FE741BD5A83F00B9FF72 /* Consts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Consts.h; sourceTree = "<group>"; };
 		1A53A3701BE27E3300046E21 /* FPS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FPS.h; sourceTree = "<group>"; };
 		1A53A3711BE2866400046E21 /* ufonts.com_courier-new.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ufonts.com_courier-new.ttf"; sourceTree = "<group>"; };
+		1A7564C41C111F8C009C4A86 /* MathUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MathUtil.cpp; sourceTree = "<group>"; };
+		1A7564C51C111F8C009C4A86 /* MathUtil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MathUtil.hpp; sourceTree = "<group>"; };
+		1A7564C71C1124F4009C4A86 /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
+		1A7564C81C1124F4009C4A86 /* Timer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Timer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +90,10 @@
 				1A53A3701BE27E3300046E21 /* FPS.h */,
 				1A1882181BF0E3DB008CB4DE /* EngineConfig.cpp */,
 				1A1882191BF0E3DB008CB4DE /* EngineConfig.hpp */,
+				1A7564C41C111F8C009C4A86 /* MathUtil.cpp */,
+				1A7564C51C111F8C009C4A86 /* MathUtil.hpp */,
+				1A7564C71C1124F4009C4A86 /* Timer.cpp */,
+				1A7564C81C1124F4009C4A86 /* Timer.hpp */,
 			);
 			path = Particals;
 			sourceTree = "<group>";
@@ -154,7 +164,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A35FE641BD5A0AF00B9FF72 /* main.cpp in Sources */,
+				1A7564C61C111F8C009C4A86 /* MathUtil.cpp in Sources */,
 				1A18821A1BF0E3DB008CB4DE /* EngineConfig.cpp in Sources */,
+				1A7564C91C1124F4009C4A86 /* Timer.cpp in Sources */,
 				1A35FE731BD5A5B900B9FF72 /* Engine.cpp in Sources */,
 				1A32F9581BDF978F00D941AD /* Simulated.cpp in Sources */,
 			);

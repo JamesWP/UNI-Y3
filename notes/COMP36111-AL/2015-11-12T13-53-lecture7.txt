@@ -1,0 +1,31 @@
+Course/Project:  COMP36111-AL
+Date:            12/11/15 13:53
+
+Turing machines
+  - Multi tape machine
+  - one input tape
+  - each tape is infinate but has a starting index 0
+  - Alphabet has n symbols and a blank symbol
+  - each tape ends at the first blank symbol
+  - the last tape is the "output tape"
+
+  M = K, Syg, Q, q0, T
+
+  K > 2 : number of tapes
+  Syg : sygma 
+
+  T : set of transitions
+
+  transition:
+    if i am in state p and see s- then i write the outputs and transition to new state q
+
+Universal machine
+
+  - is a specal program that will calculate the output of another program M and its input x
+  
+        U
+    M,x -> y
+
+    iff
+        M
+    x   -> y

@@ -1,0 +1,12 @@
+Course/Project:  COMP36111-AL
+Date:            15/10/15 13:07
+
+Exam questions:
+  - strongly connected components
+  - simplex algorythm
+
+Linear algebra
+
+
+convex hull solution space
+

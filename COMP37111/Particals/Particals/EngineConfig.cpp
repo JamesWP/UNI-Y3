@@ -13,25 +13,49 @@
 std::string getStateString(State s){
   switch (s){
     case MOVE_EMMITTER:
-      return "Move emitter";
+      return "1) Move emitter";
     case GRAVITY_CHANGE:
-      return "Gravity control";
+      return "2) Gravity control";
     case COLOR_CHANGE:
-      return "Colour control";
+      return "3) Colour control";
+    case RENDER_CHANGE:
+      return "4) Render control";
+    case SPECIAL:
+      return "5) Special control";
+    default:
+      return "Unknown";
+  }
+}
+std::string getStateDescription(State s){
+  switch (s){
+    case MOVE_EMMITTER:
+      return "Use the mouse to move the emmitter";
+    case GRAVITY_CHANGE:
+      return "Use the mouse to change the gravity";
+    case COLOR_CHANGE:
+      return "Use the mouse to affect the color of new particles\n X: freqency of change\n Y: saturation";
+    case RENDER_CHANGE:
+      return "Use the mouse to change the render mode\n X: change from lines, points, blocks, and points again";
+    case SPECIAL:
+      return "When suddenly.. the mouse became an attractor!";
     default:
       return "Unknown";
   }
 }
 State getNextState(State s){
-  switch (s){
-    case MOVE_EMMITTER:
-      return GRAVITY_CHANGE;
-    case GRAVITY_CHANGE:
-      return COLOR_CHANGE;
-    case COLOR_CHANGE:
-      return MOVE_EMMITTER;
-    default:
-      return MOVE_EMMITTER;
+  int curentState = s;
+  if ((curentState+1) != (int)EngineState::LAST){
+    return static_cast<State>(curentState+1);
+  }else{
+    return static_cast<State>(((int)EngineState::FIRST)+1);
+  }
+}
+State getPrevState(State s){
+  int curentState = s;
+  if ((curentState-1) != (int)EngineState::FIRST){
+    return static_cast<State>(curentState-1);
+  }else{
+    return static_cast<State>(((int)EngineState::LAST)-1);
   }
 }
 

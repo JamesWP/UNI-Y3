@@ -17,9 +17,12 @@
 
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+#include <chrono>
+#include <thread>
 #include "Consts.h"
 #include "Engine.hpp"
 #include "FPS.h"
+#include "Timer.hpp"
 
 EngineConfig conf;
 
@@ -34,10 +37,16 @@ int main(int argc, char const** argv)
   if (!font.loadFromFile("ufonts.com_courier-new.ttf")) {
     return EXIT_FAILURE;
   }
-  sf::Text text("Hello SFML", font, 50);
-  sf::Text stateMsg("Hello SFML", font, 50);
-  stateMsg.move(sf::Vector2f(0,40));
+  sf::Text text("Hello SFML", font, 10);
+  sf::Text stateMsg("Hello SFML", font, 20);
+  sf::Text stateDesc("Hello SFML", font, 14);
+  sf::Text instructions("Space: change mode (hold shift to reverse)\nEnter: create emmitter\nBackspace: clear screen", font, 14);
+  text.move(5,5);
+  stateMsg.move(sf::Vector2f(5,20));
+  stateDesc.move(sf::Vector2f(5,40));
+  instructions.move(5,HEIGHT-50);
   text.setColor(sf::Color::White);
+
 
 
   Engine e;
@@ -47,6 +56,16 @@ int main(int argc, char const** argv)
   FPS fpsCounter;
 
   window.setVerticalSyncEnabled(true);
+
+/*
+  Timer update;
+  update.start(std::chrono::microseconds(10), [&]{
+
+
+
+    fpsCounter.update();
+  });
+ */
 
   // Start the game loop
   while (window.isOpen())
@@ -71,7 +90,16 @@ int main(int argc, char const** argv)
 
       // Space pressed: next mode
       if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
-        conf.nextState();
+        if(!event.key.shift)
+          conf.nextState();
+        else
+          conf.prevState();
+      }
+      if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Return) {
+        conf.enterPressed();
+      }
+      if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::BackSpace) {
+        conf.backspacePressed();
       }
     }
 
@@ -81,22 +109,26 @@ int main(int argc, char const** argv)
     int64_t newTime = clock.getElapsedTime().asMicroseconds();
     int64_t elapsedTime = newTime - time;
     time = newTime;
-
+    fpsCounter.update();
     e.update(elapsedTime);
     e.draw(&window);
 
-    fpsCounter.update();
 
-    text.setString(std::to_string(fpsCounter.getFPS()*100000000000+ e.objCount()));
+    text.setString("fps: " + std::to_string(fpsCounter.getFPS()) + "   particle count: " + std::to_string(e.objCount()) + "   emitter count: " + std::to_string(e.emmCount()));
     stateMsg.setString(conf.getStateMsg());
+    stateDesc.setString(conf.getStateDesc());
 
     // Draw the string
     window.draw(text);
     window.draw(stateMsg);
+    window.draw(stateDesc);
+    window.draw(instructions);
 
     // Update the window
     window.display();
   }
+
+//  update.stop();
 
   return EXIT_SUCCESS;
 }
